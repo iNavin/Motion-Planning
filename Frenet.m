@@ -1,5 +1,5 @@
-%scenario = test_env_v1;
-scenario = drivingScenarioTrafficExample;
+scenario = test_env_v1;
+%scenario = drivingScenarioTrafficExample;
 % Default car properties
 
 carLen   = 4.7; % in meters
@@ -12,14 +12,15 @@ laneWidth   = carWidth*2; % in meters
 
 %scenario.Simulat
 ionTime = 40;
-figure(1);
+
 plot(scenario);
 
 %% constructing Refernce path
-% a_star_path = xlsread("refpath_tr1.xls");
-% waypoints = a_star_path(1:10:end,1:2)
+a_star_path = xlsread("refpath_tr3.xls");
+waypoints = a_star_path(1:5:end,1:2);
+%waypoints = a_star_path;
 
-waypoints = [0 50; 150 50; 300 75; 310 75; 400 0; 300 -50; 290 -50; 0 -50]; % in meters
+% waypoints = [0 50; 150 50; 300 75; 310 75; 400 0; 300 -50; 290 -50; 0 -50]; % in meters
 refPath = referencePathFrenet(waypoints);
 
 fprintf('refPath : %s',class(refPath));
@@ -111,16 +112,16 @@ while isRunning
     [termStatesLC,timesLC] = exampleHelperBasicLaneChange(refPath,laneWidth,egoState,timeHorizons);
     
     % Generate vehicle following states.
-%     [termStatesF,timesF] = exampleHelperBasicLeadVehicleFollow(refPath,laneWidth,safetyGap,egoState,curActorState,timeHorizons);
-%     
-%     % Combine the terminal states and times.
-%     allTS = [termStatesCC; termStatesLC; termStatesF];
-%     allDT = [timesCC; timesLC; timesF];
-%     numTS = [numel(timesCC); numel(timesLC); numel(timesF)];
+     [termStatesF,timesF] = exampleHelperBasicLeadVehicleFollow(refPath,laneWidth,safetyGap,egoState,curActorState,timeHorizons);
+    
+    % Combine the terminal states and times.
+    allTS = [termStatesCC; termStatesLC; termStatesF];
+    allDT = [timesCC; timesLC; timesF];
+    numTS = [numel(timesCC); numel(timesLC); numel(timesF)];
 
-    allTS = [termStatesCC; termStatesLC];
-    allDT = [timesCC; timesLC];
-    numTS = [numel(timesCC); numel(timesLC)];
+%     allTS = [termStatesCC; termStatesLC];
+%     allDT = [timesCC; timesLC];
+%     numTS = [numel(timesCC); numel(timesLC)];
     
     % Evaluate cost of all terminal states.
     costTS = exampleHelperEvaluateTSCost(allTS,allDT,laneWidth,speedLimit,speedWeight, latDevWeight, timeWeight);

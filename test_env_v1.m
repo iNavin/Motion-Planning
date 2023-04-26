@@ -26,7 +26,7 @@ road(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road2');
 %Add the ego vehicle
 egoVehicle = vehicle(scenario, ...
     'ClassID', 1, ...
-    'Position', [56.8 106.7 0], ...
+    'Position', [56.8 100.7 0], ...
     'Mesh', driving.scenario.carMesh, ...
     'PlotColor', [0 255 0] / 255, ...
     'Name', 'Car');
@@ -105,7 +105,7 @@ waypoints = [130.4 95.7 0;
     241.6 245.7 0;
     250.3 245.7 0;
     252.6 246.1 0];
-speed = [4;4;4;4;4;4;4;4;4;4;4;4];
+speed = [6;6;6;6;6;6;6;4;4;4;4;4];
 trajectory(truck1, waypoints, speed);
 
 car2 = vehicle(scenario, ...
@@ -130,7 +130,7 @@ waypoints = [74.6 100.2 0;
     104.8 248.4 0;
     75.1 247.5 0;
     61.3 247.1 0];
-speed = [6;6;6;6;6;6;6;6;6;6;6;6;6;6;6;6;6];
+speed = [10;10;10;10;6;6;6;6;10;10;10;6;6;6;6;6;6];
 trajectory(car2, waypoints, speed);
 
 car3 = vehicle(scenario, ...

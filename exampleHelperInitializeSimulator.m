@@ -22,7 +22,7 @@ function [viewer, futureTrajectory, actorID, actorPoses, egoID, egoPoses, stepPe
     
     % Create a second scenario object. This will be used to visualize the
     % scenario in real time.
-    viewer = drivingScenarioTrafficExample;
+    viewer = test_env_v1;
     viewer.SampleTime = scenarioObj.SampleTime;
     fprintf('viewer.SampleTime = %f',scenarioObj.SampleTime)
    

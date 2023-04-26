@@ -60,7 +60,16 @@ function laneNum = exampleHelperPredictLane(frenetState, laneWidth, dt)
             dLaneEgo = laneBounds-(frenetState(4)+Ldiff);
 
             % Determine future lane
-            laneNum(i) = min(find(dLaneEgo(2:(end-1)) >= 0 & dLaneEgo(3:(end)) < 0,1),4);
+
+            find_ = find(dLaneEgo(2:(end-1)) >= 0 & dLaneEgo(3:(end)) < 0,1)
+            
+            min_ = min(find(dLaneEgo(2:(end-1)) >= 0 & dLaneEgo(3:(end)) < 0,1),4);
+            if isempty(min_)==1
+                min_ = [4]
+            end
+
+            %laneNum(i) = min(find(dLaneEgo(2:(end-1)) >= 0 & dLaneEgo(3:(end)) < 0,1),4);
+            laneNum(i) = min(min_,4);
         end
     end
 end
